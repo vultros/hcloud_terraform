@@ -11,17 +11,19 @@ wipefs -a /dev/sda
 parted /dev/sda --script mklabel gpt
 
 # Create partitions
-parted /dev/sda --script mkpart ESP fat32 1MiB 512MiB
+parted /dev/sda --script mkpart ESP fat32 1MiB 512MiB   # sda1
 parted /dev/sda --script set 1 boot on
-parted /dev/sda --script mkpart primary ext4 512MiB 3GiB
-parted /dev/sda --script mkpart primary ext4 3GiB 5GiB
-parted /dev/sda --script mkpart primary ext4 5GiB 10GiB
-parted /dev/sda --script mkpart primary ext4 10GiB 50GiB
-parted /dev/sda --script mkpart primary ext4 50GiB 60GiB
-parted /dev/sda --script mkpart primary ext4 60GiB 70GiB
-parted /dev/sda --script mkpart primary ext4 70GiB 150GiB
-parted /dev/sda --script mkpart primary ext4 150GiB 200GiB
-parted /dev/sda --script mkpart primary ext4 200GiB 250GiB
+parted /dev/sda --script mkpart primary ext4 512MiB 10GiB # sda2
+parted /dev/sda --script mkpart primary ext4 10GiB 13GiB                # sda3
+parted /dev/sda --script mkpart primary ext4 13GiB 18GiB                # sda4  
+parted /dev/sda --script mkpart primary ext4 18GiB 20GiB        # sda5  
+parted /dev/sda --script mkpart primary ext4 20GiB 25GiB        # sda6  
+parted /dev/sda --script mkpart primary ext4 25GiB 30GiB        # sda7
+parted /dev/sda --script mkpart primary ext4 33GiB 35GiB        # sda8
+parted /dev/sda --script mkpart primary ext4 35GiB 38GiB        # sda9
+
+
+
 
 # Format partitions
 mkfs.vfat -F32 /dev/sda1

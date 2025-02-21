@@ -21,7 +21,7 @@ resource "hcloud_server" "cis_hardened_server" {
 
   provisioner "remote-exec" {
     inline = [
-      "wget https://raw.githubusercontent.com/yourrepo/setup-partitions.sh -O /root/setup-partitions.sh",
+      "wget https://raw.githubusercontent.com/vultros/hcloud_terraform/refs/heads/main/terraform_1/setup-partitions.sh -O /root/setup-partitions.sh",
       "chmod +x /root/setup-partitions.sh",
       "/root/setup-partitions.sh",
       "reboot"
@@ -30,7 +30,7 @@ resource "hcloud_server" "cis_hardened_server" {
     connection {
       type        = "ssh"
       user        = "root"
-      private_key = file("~/.ssh/id_rsa")
+      private_key = file("~/.ssh/hetzner.pem")  # Hier deine `.pem`-Datei angeben
       host        = self.ipv4_address
     }
   }
