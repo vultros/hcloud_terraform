@@ -12,18 +12,17 @@ resource "hcloud_server" "cis_hardened_server" {
   server_type = "cax11"
   image       = "ubuntu-24.04"
   location    = "nbg1"
-  ssh_keys    = ["lb"]
+  ssh_keys    = ["hetzner.pem"]
 
   # Enable Rescue Mode First
   rescue = "linux64"
 
-  user_data = file("cloud-init.yaml") # Use an external file
+  # user_data = file("cloud-init.yaml") # Use an external file
 
   provisioner "remote-exec" {
     inline = [
-      "wget https://raw.githubusercontent.com/vultros/hcloud_terraform/refs/heads/main/terraform_1/setup-partitions.sh -O /root/setup-partitions.sh",
-      "chmod +x /root/setup-partitions.sh",
-      "/root/setup-partitions.sh",
+      "wget https://raw.githubusercontent.com/vultros/hcloud_terraform/refs/heads/main/terraform_1/install_config.txt -O /root/install_config.txt",
+      "installimage -a -c /root/install_config.txt",
       "reboot"
     ]
 

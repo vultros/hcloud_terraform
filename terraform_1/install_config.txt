@@ -1,0 +1,9 @@
+DRIVE1 /dev/sda
+BOOTLOADER grub
+HOSTNAME test.cleverq.de
+PART /boot/efi esp 256M
+PART /boot ext3 800M
+PART /home ext4 4G
+PART /var ext4 1G
+PART / ext4 20G
+IMAGE /root/images/Ubuntu-2404-noble-arm64-base.tar.gz
