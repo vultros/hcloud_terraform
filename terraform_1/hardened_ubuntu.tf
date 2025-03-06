@@ -22,7 +22,8 @@ resource "hcloud_server" "cis_hardened_server" {
   provisioner "remote-exec" {
     inline = [
       "wget https://raw.githubusercontent.com/vultros/hcloud_terraform/refs/heads/main/terraform_1/install_config.txt -O /root/install_config.txt",
-      "installimage -a -c /root/install_config.txt",
+      "ls -l /root/.oldroot/nfs/install",
+      "/root/.oldroot/nfs/install/installimage -a -c /root/install_config.txt",
       "reboot"
     ]
 
